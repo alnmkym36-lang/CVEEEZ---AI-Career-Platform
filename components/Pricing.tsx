@@ -20,6 +20,9 @@ const Pricing: React.FC = () => {
     { name: 'Elite', color: 'border-purple-500' }
   ];
 
+  const rawFeatures = t('pricing.features');
+  const features = Array.isArray(rawFeatures) ? rawFeatures : [];
+
   return (
     <section id="pricing" className="py-20 bg-slate-100 dark:bg-navy-800/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +46,7 @@ const Pricing: React.FC = () => {
               <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-4">{plan.name}</h3>
               <div className="text-4xl font-bold text-slate-400 dark:text-slate-300 mb-6">—</div>
               <ul className="space-y-3 mb-8 w-full text-start text-slate-600 dark:text-slate-400">
-                {(t('pricing.features') as string[]).map((feature, i) => (
+                {features.map((feature: string, i: number) => (
                    <li key={i} className="flex items-center gap-2"><Check className="w-4 h-4 text-blue-500"/> {feature}</li>
                 ))}
               </ul>

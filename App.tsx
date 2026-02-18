@@ -36,14 +36,16 @@ const TrustStrip = () => {
 
 const HowItWorks = () => {
   const { t } = useApp();
-  const steps = t('howItWorks.steps') as any[];
+  const rawSteps = t('howItWorks.steps');
+  const steps = Array.isArray(rawSteps) ? rawSteps : [];
+
   return (
     <section className="py-20 bg-white dark:bg-navy-800/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle title={t('howItWorks.title')} subtitle={t('howItWorks.subtitle')} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center relative">
           <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-200 dark:via-blue-900 to-transparent -translate-y-1/2 hidden md:block z-0" />
-          {steps.map((item, idx) => (
+          {steps.map((item: any, idx: number) => (
             <div key={idx} className="relative z-10 bg-slate-50 dark:bg-navy-900 p-6 rounded-xl border border-slate-200 dark:border-white/5 shadow-xl transition-colors">
               <div className="w-12 h-12 rounded-full bg-blue-600 text-white font-bold text-xl flex items-center justify-center mx-auto mb-4 ring-4 ring-white dark:ring-navy-900 transition-all">
                 {idx + 1}
@@ -61,7 +63,8 @@ const HowItWorks = () => {
 const TemplatesHighlight = () => {
   const { t, lang } = useApp();
   const ArrowIcon = lang === 'ar' ? ArrowLeft : ArrowRight;
-  const features = t('templates.features') as string[];
+  const rawFeatures = t('templates.features');
+  const features = Array.isArray(rawFeatures) ? rawFeatures : [];
   
   return (
     <section className="py-20 relative overflow-hidden bg-slate-100 dark:bg-navy-900 transition-colors">
@@ -74,7 +77,7 @@ const TemplatesHighlight = () => {
                    {t('templates.desc')}
                 </p>
                 <ul className="space-y-3 mb-8 text-slate-600 dark:text-slate-400">
-                   {features.map((feature, i) => (
+                   {features.map((feature: string, i: number) => (
                       <li key={i} className="flex items-center gap-2"><Star className="w-5 h-5 text-yellow-500" /> {feature}</li>
                    ))}
                 </ul>
